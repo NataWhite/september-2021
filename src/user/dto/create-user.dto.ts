@@ -6,10 +6,9 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
-
   @IsString()
   @Length(2, 10)
   public name: string;

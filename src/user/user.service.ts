@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, User } from '@prisma/client';
+import { Post, Prisma, User } from '@prisma/client';
 import { PrismaService } from '../core/prisma.service';
 
 @Injectable()
 export class UserService {
-  constructor(private prismaService: PrismaService) {
-  }
+  constructor(private prismaService: PrismaService) {}
 
   getAllUsers(): Promise<User[]> {
     return this.prismaService.user.findMany();
@@ -14,7 +13,13 @@ export class UserService {
   getOneById(userId: string): Promise<User> {
     return this.prismaService.user.findUnique({
       where: { id: Number(userId) },
-      include: { posts: true }
+      include: { posts: true },
+    });
+  }
+
+  getUserByEmail(userEmail: string): Promise<User> {
+    return this.prismaService.user.findFirst({
+      where: { email: userEmail },
     });
   }
 
@@ -25,7 +30,7 @@ export class UserService {
   updateUser(userData: Prisma.UserUpdateInput, userId: string): Promise<User> {
     return this.prismaService.user.update({
       where: { id: Number(userId) },
-      data: { name: userData.name, city: userData.city, age: userData.age },
+      data: { name: userData.name, age: userData.age },
     });
   }
 }
