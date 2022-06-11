@@ -23,7 +23,10 @@ export class AuthGuard implements CanActivate {
         throw new UnauthorizedException({ message: 'user is not auth' });
       }
 
-      const user = this.jwtService.verify(token);
+      const user = this.jwtService.verify(token, {
+        publicKey: 'Secret',
+      });
+
       request.user = user;
       return true;
     } catch (err) {
