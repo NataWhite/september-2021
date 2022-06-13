@@ -12,6 +12,7 @@ model User {
   email    String    @unique
   name     String?
   status   Boolean?  @default(false)
+  avatar   String?
   age      Int?
   password String
   posts    Post[]
@@ -22,6 +23,7 @@ model Post {
   id        Int       @id @default(autoincrement())
   title     String
   content   String
+  likes     Int
   published Boolean?  @default(false)
   author    User?     @relation(fields: [authorId], references: [id])
   authorId  Int?
@@ -38,3 +40,8 @@ model Comment {
   Post   Post? @relation(fields: [postId], references: [id])
   postId Int?
 }
+
+// npx prisma generate // синхронізація схеми з базою
+// npx prisma migrate dev --name change_post_table --create-only  // add new column to db
+// npx prisma migrate dev --name init
+// prisma format  // check
