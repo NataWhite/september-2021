@@ -56,7 +56,25 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+
+# newman tests
+$ npm run test_newman
 ```
+
+## Database
+
+---
+
+## Docker
+
+set up api in docker
+
+```angular2html
+
+```
+
+
+
 
 ## Support
 
